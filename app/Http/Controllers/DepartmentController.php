@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use App\Models\Department;
 
@@ -12,7 +13,8 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        //
+        $departments = Department::all(); //Get all departments
+        return view('admin.department.index', compact('departments'));
     }
 
     /**
@@ -50,7 +52,8 @@ class DepartmentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $department = Department::findOrFail($id);
+        return view('admin.department.edit', compact('department'));
     }
 
     /**
@@ -58,7 +61,20 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $department = Department::findOrFail($id);
+        $this->validate($request, [
+            'name' => 'required|same:name'
+        ]);
+        $data = $request->all();
+        
+        try {
+            $department->update($data);
+            
+            return redirect()->route('departments.index')->with('message', 'Department updated successfully');
+        } catch (\Throwable $th) {
+            throw new Exception('Error updating department');
+        }
+
     }
 
     /**
@@ -66,6 +82,9 @@ class DepartmentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $department = Department::findOrFail($id);
+        $department->delete();
+    
+        return redirect()->route('departments.index')->with('message', 'Department deleted successfully');
     }
 }

@@ -9,15 +9,16 @@
                     {{ Session::get('message') }}
                 </div>
             @endif
-            <form action="{{ route('departments.store') }}" method="post">
+            <form action="{{ route('departments.update', [$department->id]) }}" method="post">
                 @csrf
+                @method('PATCH')
                 <div class="card">
-                    <div class="card-header">Create a Department</div>
+                    <div class="card-header">Update Department</div>
 
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror">
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ $department->name }}">
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -26,7 +27,7 @@
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea type="text" name="description" class="form-control @error('description') is-invalid @enderror"></textarea>
+                            <textarea type="text" name="description" class="form-control @error('description') is-invalid @enderror">{{ $department->description }}</textarea>
                                 @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -34,7 +35,7 @@
                                 @enderror
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-success mt-3">Submit</button>
+                            <button type="submit" class="btn btn-success mt-3">Update</button>
 
                         </div>
                     </div>
