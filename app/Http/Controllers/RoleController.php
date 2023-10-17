@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use Exception;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -52,7 +53,8 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $role = Role::findOrFail($id);
+        return view('admin.role.edit', compact('role'));
     }
 
     /**
@@ -60,7 +62,20 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:roles,name,' . $id
+        ]);
+
+        try {
+            $role = Role::findOrFail($id);
+            $role->update($request->all());
+
+            return redirect()->route('roles.index')->with('message', 'Role updated successfully.');
+        } catch (\Throwable $th) {
+            
+            throw new Exception("Error updating role Request" . $th->getMessage());
+            
+        }
     }
 
     /**
@@ -68,6 +83,7 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Role::findOrFail($id)->delete();
+        return redirect()->route('roles.index')->with('message', 'Role deleted successfully');
     }
 }
