@@ -6,7 +6,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active" aria-current="page">
-                Register Employee
+                Edit Employee
             </li>
         </ol>
     </nav>
@@ -20,13 +20,13 @@
             @endif
             <form action="{{ route('users.update', [$user->id]) }}" method="post" enctype="multipart/form-data">
                 @csrf
+                {{ method_field('PATCH') }}
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="card">
                             <div class="card-header">General Information</div>
                             <div class="card-body">
                                 <div class="form-row">
-                                    {{-- <div class="col"> --}}
                                         <label for="inputFirstName">Full Name</label>
                                         <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
                                             value="{{ $user->name }}">
@@ -35,17 +35,6 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
-                                    {{-- </div> --}}
-                                    {{-- <div class="col">
-                                        <label for="inputLastName">Last Name</label>
-                                        <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror"
-                                            placeholder="Last name">
-                                            @error('last_name')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                    </div> --}}
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
@@ -122,7 +111,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input type="password" name="password" class="form-control" required="">
+                                    <input type="password" name="password" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Role</label>

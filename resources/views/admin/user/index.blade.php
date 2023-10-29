@@ -46,8 +46,8 @@
                         <td><img width="100" src="{{ asset('profile') }}/{{ $user->image }}" alt=""></td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td><span class="badge badge-danger">{{ $user->role->name }}</span></td>
-                        <td><span class="badge badge-success">{{ $user->department->name }}</span></td>
+                        <td><span class="badge badge-danger">{{ $user->role->name ?? '' }}</span></td>
+                        <td><span class="badge badge-success">{{ $user->department->name ?? '' }}</span></td>
                         <td>{{ $user->designation }}</td>
                         <td>{{ $user->start_from }}</td>
                         <td>{{ $user->address }}</td>
@@ -62,7 +62,7 @@
                             <!-- Modal -->
                             <div class="modal fade" id="removeUserModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="removeUserModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
-                                <form action="{{ route('departments.destroy', [$user->id]) }}" method="post">
+                                <form action="{{ route('users.destroy', [$user->id]) }}" method="post">
                                     @csrf
                                     {{ method_field('DELETE') }}
                                     <div class="modal-content">
