@@ -49,4 +49,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function department()
+    {
+        return $this->hasOne(Department::class, 'id', 'department_id');
+    }
+
+    public function role()
+    {
+        return $this->hasOne(Role::class, 'id', 'role_id');
+    }
 }
