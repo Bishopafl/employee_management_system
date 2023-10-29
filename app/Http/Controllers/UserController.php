@@ -14,7 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::get();
+        return view('admin.user.index', compact('users'));
     }
 
     /**
@@ -36,14 +37,12 @@ class UserController extends Controller
         $this->validate($request, [
             'first_name'    => 'required',
             'last_name'     => 'required',
-            'address'       => 'required',
-            'mobile_number' => 'required',
-            'email'         => 'required|string|email',
+            'email'         => 'required|string|email|unique:users',
             'password'      => 'required|string',
             'department_id' => 'required',
             'designation'   => 'required',
             'role_id'       => 'required',
-            'image'         => 'required|mimes:jpeg,jpg,png',
+            'image'         => 'mimes:jpeg,jpg,png',
             'start_from'    => 'required|date',
         ]);
 
@@ -60,7 +59,7 @@ class UserController extends Controller
         $data['password'] = bcrypt($request->password);
         User::create($data);
 
-        return redirect()->back()->with('message','User created successfully');
+        return redirect()->back()->with('message', 'User created successfully');
     }
 
     /**
@@ -76,7 +75,13 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $department = $user->department;  // get department of the user
+        $role = $user->role;  // get role of the user
+        $allDepartments = Department::all();  // get all departments
+        $allRoles = Role::all();  // get all roles
+
+        return view('admin.user.edit', compact('user', 'department', 'role', 'allDepartments', 'allRoles'));
     }
 
     /**
