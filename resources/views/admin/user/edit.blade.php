@@ -18,7 +18,7 @@
                 {{ Session::get('message') }}
             </div>
             @endif
-            <form action="{{ route('users.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('users.update', [$user->id]) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row justify-content-center">
                     <div class="col-md-8">
@@ -26,17 +26,17 @@
                             <div class="card-header">General Information</div>
                             <div class="card-body">
                                 <div class="form-row">
-                                    <div class="col">
-                                        <label for="inputFirstName">First Name</label>
-                                        <input type="text" name="first_name" class="form-control @error('first_name') is-invalid @enderror"
-                                            placeholder="First name">
-                                            @error('first_name')
+                                    {{-- <div class="col"> --}}
+                                        <label for="inputFirstName">Full Name</label>
+                                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                                            value="{{ $user->name }}">
+                                            @error('name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
-                                    </div>
-                                    <div class="col">
+                                    {{-- </div> --}}
+                                    {{-- <div class="col">
                                         <label for="inputLastName">Last Name</label>
                                         <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror"
                                             placeholder="Last name">
@@ -45,24 +45,24 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="inputEmail4">Street Address</label>
                                         <input type="text" name="address" class="form-control" id="inputaddress4"
-                                            placeholder="ex: 123 Street Road">
+                                        value="{{ $user->address }}">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="inputPassword4">Mobile Number</label>
                                         <input type="text" name="mobile_number" class="form-control"
-                                            id="inputMobileNumber" placeholder="Mobile Number">
+                                            id="inputMobileNumber" value="{{ $user->mobile_number }}">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputDesignation">Designation</label>
                                     <input type="text" name="designation" class="form-control @error('designation') is-invalid @enderror" id="inputDesignation"
-                                        required="">
+                                    value="{{ $user->designation }}">
                                         @error('designation')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -71,11 +71,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputDepartment">Department</label>
-                                    <select class="form-control" name="department_id" name="department_id" id="">
-                                        <option selected>Choose...</option>
-                                        @foreach($departments as $department)
-                                            <option value="{{ $department->id }}">{{ $department->name }}</option>
-                                        @endforeach
+                                    <select class="form-control" name="department_id">
+                                        {@foreach($allDepartments as $dept)
+                                            <option value="{{ $dept->id }}"
+                                                @if($user->department_id == $dept->id)
+                                                    selected
+                                                @endif>{{ $dept->name }}
+                                            </option>
+                                        @endforeach                                        
                                     </select>
 
                                 </div>
@@ -84,7 +87,7 @@
                                     <div class="form-group col-md-6">
                                         <label for="inputStartDate">Start date</label>
                                         <input type="date" name="start_from" class="form-control @error('start_from') is-invalid @enderror" id="inputStartDate"
-                                            placeholder="mm-dd-yyy" required="">
+                                            value="{{ $user->start_from }}" required="">
                                             @error('start_from')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -110,7 +113,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" required="">
+                                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" required="" value="{{ $user->email }}">
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -124,14 +127,18 @@
                                 <div class="form-group">
                                     <label for="email">Role</label>
                                     <select class="form-control" name="role_id" name="role_id" required="">
-                                        @foreach($roles as $role)
-                                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                        @foreach($allRoles as $roleOption)
+                                            <option value="{{ $roleOption->id }}"
+                                                @if($user->role_id == $roleOption->id)
+                                                    selected
+                                                @endif>{{ $roleOption->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>   
                         </div>
-                        <button type="submit" class="btn btn-primary mt-4">Create User</button>
+                        <button type="submit" class="btn btn-primary mt-4">Update User</button>
                     </div>
                 </div>
             </form>
