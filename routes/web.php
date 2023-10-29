@@ -25,6 +25,12 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('departments', DepartmentController::class);
-Route::resource('roles', RoleController::class);
-Route::resource('users', UserController::class);
+Route::group(['middleware' => 'auth'], function() {
+    Route::resource('departments', DepartmentController::class);
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
