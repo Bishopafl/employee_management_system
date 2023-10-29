@@ -18,8 +18,8 @@
                     <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="{{ route('departments.create') }}">Create Department</a>
                             <a class="nav-link" href="{{ route('departments.index') }}">View Departments</a>
+                            <a class="nav-link" href="{{ route('departments.create') }}">Create Department</a>
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -39,9 +39,8 @@
                             <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
                                 data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{ route('roles.create') }}">Create User Role</a>
                                     <a class="nav-link" href="{{ route('roles.index') }}">View Roles</a>
-                                    
+                                    <a class="nav-link" href="{{ route('roles.create') }}">Create User Role</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -53,7 +52,7 @@
                             <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne"
                                 data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{ route('users.index') }}">View User</a>
+                                    <a class="nav-link" href="{{ route('users.index') }}">View Users</a>
                                     <a class="nav-link" href="{{ route('users.create') }}">Create User</a>
                                     {{-- <a class="nav-link" href="500.html">500 Page</a> --}}
                                 </nav>
