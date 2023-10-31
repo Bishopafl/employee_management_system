@@ -13,7 +13,7 @@
                     <div class="card-body">
                         <select class="form-control @error('role_id')
                             is-invalid
-                        @enderror" name="role_id" id="">
+                        @enderror " name="role_id" id="">
                             <option value="">Select Role</option>
                             @foreach ($allRoles as $role)
                                 <option value="{{ $role->id }}">{{ $role->name }}</option>
@@ -53,9 +53,27 @@
                                 <td><input type="checkbox" name="name[role][can-delete]" value="4"></td>
                                 <td><input type="checkbox" name="name[role][can-list]" value="5"></td>
                               </tr>
+                              <tr>
+                                <td>Permissions</td>
+                                <td><input type="checkbox" name="name[permission][can-add]" value="1"></td>
+                                <td><input type="checkbox" name="name[permission][can-edit]" value="2"></td>
+                                <td><input type="checkbox" name="name[permission][can-view]" value="3"></td>
+                                <td><input type="checkbox" name="name[permission][can-delete]" value="4"></td>
+                                <td><input type="checkbox" name="name[permission][can-list]" value="5"></td>
+                              </tr>
+                              <tr>
+                                <td>User</td>
+                                <td><input type="checkbox" name="name[user][can-add]" value="1"></td>
+                                <td><input type="checkbox" name="name[user][can-edit]" value="2"></td>
+                                <td><input type="checkbox" name="name[user][can-view]" value="3"></td>
+                                <td><input type="checkbox" name="name[user][can-delete]" value="4"></td>
+                                <td><input type="checkbox" name="name[user][can-list]" value="5"></td>
+                              </tr>
                             </tbody>
                           </table>
-
+                          <button type="submit" class="btn btn-primary">
+                            Submit
+                          </button>
                     </div>
                 </div>
             </form>
