@@ -13,7 +13,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //
+        $permissions = Permission::get();
+        return view ('admin.permission.index', compact('permissions'));
     }
 
     /**
@@ -50,7 +51,7 @@ class PermissionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
     }
 
     /**
