@@ -29,34 +29,54 @@
                     </a>
                     <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
                         data-bs-parent="#sidenavAccordion">
+                        <!-- ROLES MENU -->
                         <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                data-bs-target="#pagesCollapseAuth" aria-expanded="false"
-                                aria-controls="pagesCollapseAuth">
+                                data-bs-target="#rolesCollapseAuth" aria-expanded="false"
+                                aria-controls="rolesCollapseAuth">
                                 Roles
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
+                            <div class="collapse" id="rolesCollapseAuth" aria-labelledby="headingOne"
                                 data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{{ route('roles.index') }}">View Roles</a>
                                     <a class="nav-link" href="{{ route('roles.create') }}">Create User Role</a>
                                 </nav>
                             </div>
+                            <!-- /ROLES MENU -->
+
+                            <!-- USER MENU -->
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                data-bs-target="#pagesCollapseError" aria-expanded="false"
-                                aria-controls="pagesCollapseError">
+                                data-bs-target="#usersCollapseError" aria-expanded="false"
+                                aria-controls="usersCollapseError">
                                 Users
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne"
+                            <div class="collapse" id="usersCollapseError" aria-labelledby="headingOne"
                                 data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{{ route('users.index') }}">View Users</a>
                                     <a class="nav-link" href="{{ route('users.create') }}">Create User</a>
-                                    {{-- <a class="nav-link" href="500.html">500 Page</a> --}}
                                 </nav>
                             </div>
+                            <!-- /USER MENU -->
+
+                            <!-- PERMISSIONS MENU -->
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                data-bs-target="#permissionsCollapseError" aria-expanded="false"
+                                aria-controls="permissionsCollapseError">
+                                Permission
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="permissionsCollapseError" aria-labelledby="headingOne"
+                                data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{{ route('permission.index') }}">View Permissions</a>
+                                    <a class="nav-link" href="{{ route('permission.create') }}">Create Permission</a>
+                                </nav>
+                            </div>
+                            <!-- /PERMISSIONS MENU -->
                         </nav>
                     </div>
                     <div class="sb-sidenav-menu-heading">Addons</div>

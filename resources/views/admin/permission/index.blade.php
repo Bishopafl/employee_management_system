@@ -26,7 +26,7 @@
                         <th>SN</th>
                         <th>Name</th>
                         <th>Edit</th>
-                        {{-- <th>Delete</th> --}}
+                        <th>Delete</th>
                     </tr>
 
                 </thead>
@@ -37,27 +37,27 @@
                         <td>{{ $key+1 }}</td>
                         <td>{{ $permission->role->name }}</td>
                         <td>
-                            <a href="{{ route('permissions.edit', [$permission->id]) }}"><i class="fas fa-edit" h></i></a>
+                            <a href="{{ route('permission.edit', [$permission->id]) }}"><i class="fas fa-edit" h></i></a>
                         </td>
                         <td>
                             
-                            {{-- <a href="#" data-toggle="modal" data-target="#removeDepartmentModal{{ $permission->id }}"><i class="fas fa-trash"></i></a> --}}
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="removeDepartmentModal{{ $permission->id }}" tabindex="-1" role="dialog" aria-labelledby="removeDepartmentModalLabel" aria-hidden="true">
+                            <a href="#" data-toggle="modal" data-target="#removePermissionModal{{ $permission->id }}"><i class="fas fa-trash"></i></a>
+                        </td>
+                        <!-- Modal -->
+                        <div class="modal fade" id="removePermissionModal{{ $permission->id }}" tabindex="-1" role="dialog" aria-labelledby="removePermissionModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
-                                <form action="{{ route('departments.destroy', [$permission->id]) }}" method="post">
+                                <form action="{{ route('permission.destroy', [$permission->id]) }}" method="post">
                                     @csrf
                                     {{ method_field('DELETE') }}
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="removeDepartmentModalLabel">Modal title</h5>
+                                            <h5 class="modal-title" id="removePermissionModalLabel">Modal title</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            Do you want to delete department: ?
+                                            Do you want to delete permission: {{ $permission->role->name }}?
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -66,8 +66,7 @@
                                     </div>
                                 </form>
                             </div>
-                            </div>
-                        </td>
+                        </div>
                     </tr>
                     @endforeach
                     @else
