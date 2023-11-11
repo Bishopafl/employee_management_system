@@ -89,6 +89,7 @@ class LeaveController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Leave::findOrFail($id)->delete();
+        return redirect()->route('leaves.create')->with('message', 'Leave Request Deleted');
     }
 }

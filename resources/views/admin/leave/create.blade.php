@@ -98,9 +98,8 @@
                         </tr>
                     </thead>
                     <tbody>
+
                         @foreach ($leaves as $leave)
-                            
-                        @endforeach
                         <tr>
                             <th scope="row">1</th>
                             <td>{{ $leave->from }}</td>
@@ -108,20 +107,56 @@
                             <td>{{ $leave->description }}</td>
                             <td>{{ $leave->type }}</td>
 
-                        @if ($leave->status == App\Models\Leave::PENDING)
+                            @if ($leave->status == App\Models\Leave::PENDING)
                             <td class="bg-warning">
                                 Pending
                             </td>
-                        @else
+                            @else
                             <td class="bg-success">
                                 Approved
                             </td>
-                        @endif
+                            @endif
 
                             <td>{{ $leave->reply }}</td>
                             <td><a href="{{ route('leaves.edit', [$leave->id]) }}"><i class="fas fa-edit"></i></a></td>
-                            <td></td>
+
+                            <td>
+
+                                <a href="#" data-toggle="modal"
+                                    data-target="#removeLeaveRequestModal{{ $leave->id }}"><i
+                                        class="fas fa-trash"></i></a>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="removeLeaveRequestModal{{ $leave->id }}" tabindex="-1"
+                                    role="dialog" aria-labelledby="removeLeaveRequestModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <form action="{{ route('leaves.destroy', [$leave->id]) }}" method="post">
+                                            @csrf
+                                            {{ method_field('DELETE') }}
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="removeLeaveRequestModalLabel">Remove Leave</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Do you want to delete leave request for: {{ $leave->type }}?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
