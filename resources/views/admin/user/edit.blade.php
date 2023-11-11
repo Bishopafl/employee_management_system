@@ -127,7 +127,9 @@
                                 </div>
                             </div>   
                         </div>
-                        <button type="submit" class="btn btn-primary mt-4">Update User</button>
+                        @if (isset(auth()->user()->role->permission['name']['user']['can-edit']))
+                            <button type="submit" class="btn btn-primary mt-4">Update User</button>
+                        @endif
                     </div>
                 </div>
             </form>

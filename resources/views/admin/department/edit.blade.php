@@ -35,8 +35,9 @@
                                 @enderror
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-success mt-3">Update</button>
-
+                            @if (isset(auth()->user()->role->permission['name']['department']['can-edit']))
+                                <button type="submit" class="btn btn-success mt-3">Update</button>
+                            @endif
                         </div>
                     </div>
                 </div>
