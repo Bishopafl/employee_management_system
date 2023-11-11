@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -34,6 +35,7 @@ Route::group(['middleware' => ['auth', 'has.permission']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('permission', PermissionController::class);
+    Route::resource('leaves', LeaveController::class);
 });
 
 Auth::routes();
