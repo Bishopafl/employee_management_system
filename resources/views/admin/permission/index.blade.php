@@ -37,11 +37,14 @@
                         <td>{{ $key+1 }}</td>
                         <td>{{ $permission->role->name }}</td>
                         <td>
-                            <a href="{{ route('permission.edit', [$permission->id]) }}"><i class="fas fa-edit" h></i></a>
+                            @if (isset(auth()->user()->role->permission['name']['permission']['can-edit']))
+                                <a href="{{ route('permission.edit', [$permission->id]) }}"><i class="fas fa-edit" h></i></a>
+                            @endif
                         </td>
                         <td>
-                            
-                            <a href="#" data-toggle="modal" data-target="#removePermissionModal{{ $permission->id }}"><i class="fas fa-trash"></i></a>
+                            @if (isset(auth()->user()->role->permission['name']['permission']['can-delete']))
+                                <a href="#" data-toggle="modal" data-target="#removePermissionModal{{ $permission->id }}"><i class="fas fa-trash"></i></a>
+                            @endif
                         </td>
                         <!-- Modal -->
                         <div class="modal fade" id="removePermissionModal{{ $permission->id }}" tabindex="-1" role="dialog" aria-labelledby="removePermissionModalLabel" aria-hidden="true">
