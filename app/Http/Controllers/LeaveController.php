@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Http\Controllers;
 
@@ -7,14 +7,13 @@ use Illuminate\Http\Request;
 
 class LeaveController extends Controller
 {
-
-    const PENDING = 0;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $leaves = Leave::latest()->get();
+        return view('admin.leave.index', compact('leaves'));
     }
 
     /**
@@ -91,5 +90,18 @@ class LeaveController extends Controller
     {
         Leave::findOrFail($id)->delete();
         return redirect()->route('leaves.create')->with('message', 'Leave Request Deleted');
+    }
+
+    public function acceptReject(Request $request, $id) 
+    {
+        $status = $request->status;
+        $message = $request->message;
+
+        $leave = Leave::findOrFail($id);
+        $leave->update([
+            'status'      => $status,
+            'message'     => $message,
+        ]);
+        return redirect()->route('leaves.index')->with('message', 'Leave Request Updated');
     }
 }
