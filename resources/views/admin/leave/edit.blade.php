@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mt-5">
-    <h2>Leave Request Form</h2>
+    <h2>Edit Leave Request Form</h2>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active" aria-current="page">
@@ -18,8 +18,9 @@
                 {{ Session::get('message') }}
             </div>
             @endif
-            <form action="{{ route('leaves.store') }}" method="post">
+            <form action="{{ route('leaves.update', [$leave->id]) }}" method="post">
                 @csrf
+                {{ method_field('PATCH') }}
                 <div class="row justify-content-center">
                     <div class="col-md-12">
                         <div class="card">
@@ -30,7 +31,7 @@
                                         <label for="inputFrom">From Date</label>
                                         <input type="" name="from"
                                             class="form-control @error('from') is-invalid @enderror" required=""
-                                            id="datepicker">
+                                            id="datepicker" value="{{ $leave->from }}">
                                         @error('from')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -41,7 +42,7 @@
                                         <label for="inputLastName">To Date</label>
                                         <input type="" name="to"
                                             class="form-control @error('last_name') is-invalid @enderror"
-                                            id="datepicker1">
+                                            id="datepicker1" value="{{ $leave->to }}">
                                         @error('to')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -67,64 +68,20 @@
                                     <label for="inputDescription">Description</label>
                                     <textarea name="description"
                                         class="form-control @error('description') is-invalid @enderror" cols="30"
-                                        rows="10"></textarea>
+                                        rows="10">{{ $leave->description }}</textarea>
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
-                                <button type="submit" class="btn btn-primary mt-4">Create Leave Request</button>
+                                <button type="submit" class="btn btn-primary mt-4">Update Leave Request</button>
                             </div>
                         </div>
                     </div>
 
                 </div>
             </form>
-
-            <div class="request-table mt-5">
-                <table class="table">
-                    <thead class="thead-light">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Request Date From</th>
-                            <th scope="col">Request Date To</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Leave Type</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Reply</th>
-                            <th scope="col">Edit</th>
-                            <th scope="col">Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($leaves as $leave)
-                            
-                        @endforeach
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>{{ $leave->from }}</td>
-                            <td>{{ $leave->to }}</td>
-                            <td>{{ $leave->description }}</td>
-                            <td>{{ $leave->type }}</td>
-
-                        @if ($leave->status == App\Models\Leave::PENDING)
-                            <td class="bg-warning">
-                                Pending
-                            </td>
-                        @else
-                            <td class="bg-success">
-                                Approved
-                            </td>
-                        @endif
-
-                            <td>{{ $leave->reply }}</td>
-                            <td><a href="{{ route('leaves.edit', [$leave->id]) }}"><i class="fas fa-edit"></i></a></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
 </div>

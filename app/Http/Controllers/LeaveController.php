@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 class LeaveController extends Controller
 {
+
+    const PENDING = 0;
     /**
      * Display a listing of the resource.
      */
@@ -20,7 +22,8 @@ class LeaveController extends Controller
      */
     public function create()
     {
-        return view('admin.leave.create');
+        $leaves = Leave::latest()->where('user_id', auth()->user()->id)->get();
+        return view('admin.leave.create', compact('leaves'));
     }
 
     /**
@@ -28,7 +31,18 @@ class LeaveController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'from'        => 'required',
+            'to'          => 'required',
+            'description' => 'required',
+            'type'        => 'required',
+        ]);
+        $data = $request->all();
+        $data['user_id'] = auth()->user()->id; // assign user_id to the data
+        $data['message'] = Leave::MESSAGE_PENDING;
+        $data['status']  = Leave::PENDING;
+        Leave::create($data);
+        return redirect()->back()->with('message', 'Leave Request Submitted');
     }
 
     /**
@@ -44,7 +58,8 @@ class LeaveController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $leave = Leave::findOrFail($id);
+        return view('admin.leave.edit', compact('leave'));
     }
 
     /**
@@ -52,7 +67,21 @@ class LeaveController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->validate($request, [
+            'from'        => 'required',
+            'to'          => 'required',
+            'description' => 'required',
+            'type'        => 'required',
+        ]);
+        $request_data = $request->all();
+        $leave_data   = Leave::findOrFail($id);
+
+        $request_data['user_id'] = auth()->user()->id;
+        $leave_data['message']   = Leave::MESSAGE_PENDING;
+        $leave_data['status']    = Leave::PENDING;
+
+        $leave_data->update($request_data);
+        return redirect()->route('leaves.create')->with('message', 'Leave Request Updated');
     }
 
     /**

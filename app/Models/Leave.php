@@ -9,5 +9,8 @@ class Leave extends Model
 {
     use HasFactory;
 
+    const PENDING = 0;
+    const MESSAGE_PENDING = '';
+
     protected $guarded = [];
 }
