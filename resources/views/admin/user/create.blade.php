@@ -83,7 +83,7 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="inputStartDate">Start date</label>
-                                        <input type="date" name="start_from" class="form-control @error('start_from') is-invalid @enderror" id="inputStartDate"
+                                        <input type="" name="start_from" class="form-control @error('start_from') is-invalid @enderror" id="datepicker"
                                             placeholder="mm-dd-yyy" required="">
                                             @error('start_from')
                                                 <span class="invalid-feedback" role="alert">
