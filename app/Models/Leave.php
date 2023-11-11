@@ -13,4 +13,9 @@ class Leave extends Model
     const MESSAGE_PENDING = '';
 
     protected $guarded = [];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
