@@ -98,14 +98,6 @@
                             <!-- /PERMISSIONS MENU -->
                         </nav>
                     </div>
-                    <!-- LEAVES MENU -->
-                {{-- @if (isset(auth()->user()->role->permission['name']['leave']['can-list']))
-                    <a class="nav-link" href="{{ route('leaves.index') }}">
-                        <div class="sb-nav-link-icon"><i class="fas fa-pencil-alt"></i></div>
-                        Staff Leave
-                    </a>
-                @endif --}}
-                    <!-- /LEAVES MENU -->
 
                 <!-- lEAVES MENU -->
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -115,7 +107,7 @@
                     Leave Requests
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
-                <div class="collapse" id="leaveRequestCollapse" aria-labelledby="headingOne"
+                <div class="collapse" id="leaveRequestCollapse" aria-labelledby="headingThree"
                     data-bs-parent="#sidenavAccordionPages">
                     <nav class="sb-sidenav-menu-nested nav">
                         @if (isset(auth()->user()->role->permission['name']['leave']['can-list']))
@@ -124,6 +116,29 @@
 
                         <a class="nav-link" href="{{ route('leaves.create') }}">Create Leave Request</a>
                         
+                    </nav>
+                </div>
+                <!-- /LEAVES MENU -->
+
+                <!-- NOTICE MENU -->
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                data-bs-target="#noticeRequestCollapse" aria-expanded="false"
+                aria-controls="noticeRequestCollapse">
+                    <div class="sb-nav-link-icon"><i class="fas fa-door-open"></i></div>
+                    Staff Notice
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="noticeRequestCollapse" aria-labelledby="headingFour"
+                    data-bs-parent="#sidenavAccordionPages">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        @if (isset(auth()->user()->role->permission['name']['notice']['can-list']))
+                            <a class="nav-link" href="{{ route('notices.index') }}">View Notice Requests</a>
+                        @endif
+                        
+                        @if (isset(auth()->user()->role->permission['name']['notice']['can-add']))
+                            <a class="nav-link" href="{{ route('notices.create') }}">Create Notice Request</a>
+                        @endif
+
                     </nav>
                 </div>
                 <!-- /LEAVES MENU -->
