@@ -28,7 +28,7 @@
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                         User Settings
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
@@ -98,20 +98,17 @@
                             <!-- /PERMISSIONS MENU -->
                         </nav>
                     </div>
-                    <div class="sb-sidenav-menu-heading">Addons</div>
-                    <a class="nav-link" href="charts.html">
-                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                        Charts
+                @if (isset(auth()->user()->role->permission['name']['leave']['can-list']))
+                    <a class="nav-link" href="{{ route('leaves.index') }}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-pencil-alt"></i></div>
+                        Staff Leave
                     </a>
-                    <a class="nav-link" href="tables.html">
-                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        Tables
-                    </a>
+                @endif
                 </div>
             </div>
-            <div class="sb-sidenav-footer">
+            {{-- <div class="sb-sidenav-footer">
                 <div class="small">Logged in as:</div>
                 Start Bootstrap
-            </div>
+            </div> --}}
         </nav>
     </div>
