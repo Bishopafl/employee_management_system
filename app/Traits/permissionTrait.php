@@ -48,7 +48,21 @@ trait permissionTrait {
             return abort(401);
         }
 
+        /**
+         * For Leaves
+         */
         if (!isset(auth()->user()->role->permission['name']['leave']['can-list']) && \Route::is('leaves.index') ) {
+            return abort(401);
+        }
+
+        /**
+         * For Notices
+         */
+        if (!isset(auth()->user()->role->permission['name']['notice']['can-add']) && \Route::is('notices.create') ) {
+            return abort(401);
+        }
+
+        if (!isset(auth()->user()->role->permission['name']['notice']['can-list']) && \Route::is('notices.index') ) {
             return abort(401);
         }
     }
