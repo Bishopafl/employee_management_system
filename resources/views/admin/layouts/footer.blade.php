@@ -42,5 +42,10 @@
       $( "#datepicker1" ).datepicker({dateFormat:"yy-mm-dd"}).val();
     } );
 </script>
+<script>
+    $( function() {
+      $( "#datepicker2" ).datepicker({dateFormat:"yy-mm-dd"}).val();
+    } );
+</script>
 </body>
 </html>
