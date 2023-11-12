@@ -15,7 +15,7 @@
                 @csrf
                 {{ method_field('PATCH') }}
                 <div class="card">
-                    <div class="card-header">{{ __('Dashboard') }}</div>
+                    <div class="card-header">Permissions</div>
 
                     <div class="card-body">
                         <h3>{{ $permission->role->name }}</h3>
@@ -165,6 +165,19 @@
                                             type="checkbox" 
                                             name="name[user][can-list]" 
                                             @if(isset($permission['name']['user']['can-view'])) checked @endif 
+                                            value="1">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Leave</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><input 
+                                            type="checkbox" 
+                                            name="name[leave][can-list]" 
+                                            @if(isset($permission['name']['leave']['can-list'])) checked @endif 
                                             value="1">
                                     </td>
                                 </tr>
