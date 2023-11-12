@@ -98,12 +98,35 @@
                             <!-- /PERMISSIONS MENU -->
                         </nav>
                     </div>
-                @if (isset(auth()->user()->role->permission['name']['leave']['can-list']))
+                    <!-- LEAVES MENU -->
+                {{-- @if (isset(auth()->user()->role->permission['name']['leave']['can-list']))
                     <a class="nav-link" href="{{ route('leaves.index') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-pencil-alt"></i></div>
                         Staff Leave
                     </a>
-                @endif
+                @endif --}}
+                    <!-- /LEAVES MENU -->
+
+                <!-- lEAVES MENU -->
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                data-bs-target="#leaveRequestCollapse" aria-expanded="false"
+                aria-controls="leaveRequestCollapse">
+                    <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt	"></i></div>
+                    Leave Requests
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="leaveRequestCollapse" aria-labelledby="headingOne"
+                    data-bs-parent="#sidenavAccordionPages">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        @if (isset(auth()->user()->role->permission['name']['leave']['can-list']))
+                            <a class="nav-link" href="{{ route('leaves.index') }}">View Leave Requests</a>
+                        @endif
+
+                        <a class="nav-link" href="{{ route('leaves.create') }}">Create Leave Request</a>
+                        
+                    </nav>
+                </div>
+                <!-- /LEAVES MENU -->
                 </div>
             </div>
             {{-- <div class="sb-sidenav-footer">
