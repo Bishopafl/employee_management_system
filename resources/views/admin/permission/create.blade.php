@@ -14,7 +14,7 @@
             <form action="{{ route('permission.store') }}" method="post">
                 @csrf
                 <div class="card">
-                    <div class="card-header">{{ __('Dashboard') }}</div>
+                    <div class="card-header">Permissions</div>
 
                     <div class="card-body">
                         <select name="role_id" class="form-control @error('role_id')
@@ -74,6 +74,14 @@
                                 <td><input type="checkbox" name="name[user][can-view]" value="1"></td>
                                 <td><input type="checkbox" name="name[user][can-delete]" value="1"></td>
                                 <td><input type="checkbox" name="name[user][can-list]" value="1"></td>
+                              </tr>
+                              <tr>
+                                <td>Notice</td>
+                                <td><input type="checkbox" name="name[notice][can-add]" value="1"></td>
+                                <td><input type="checkbox" name="name[notice][can-edit]" value="1"></td>
+                                <td><input type="checkbox" name="name[notice][can-view]" value="1"></td>
+                                <td><input type="checkbox" name="name[notice][can-delete]" value="1"></td>
+                                <td><input type="checkbox" name="name[notice][can-list]" value="1"></td>
                               </tr>
                               <tr>
                                 <td>Approve Leave</td>
